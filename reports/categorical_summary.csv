@@ -1,0 +1,9 @@
+Feature,Distinct Values,Top Mode,Top Mode Freq,Top Mode %
+gender,2,Male,3555,50.48
+SeniorCitizen,2,0,5901,83.79
+Partner,2,No,3641,51.7
+Dependents,2,No,4933,70.04
+Contract,3,Month-to-month,3875,55.02
+InternetService,3,Fiber optic,3096,43.96
+PaymentMethod,4,Electronic check,2365,33.58
+Churn,2,No,5174,73.46
