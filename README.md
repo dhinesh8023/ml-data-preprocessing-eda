@@ -3,7 +3,8 @@
 
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue?logo=python&logoColor=white)
 ![Pandas](https://img.shields.io/badge/Pandas-Data%20Wrangling-darkblue?logo=pandas&logoColor=white)
-![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-Preprocessing-orange?logo=scikit-learn&logoColor=white)
+![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-Modeling%20%26%20Preprocessing-orange?logo=scikit-learn&logoColor=white)
+![Flask](https://img.shields.io/badge/Flask-Web%20Dashboard-black?logo=flask&logoColor=white)
 ![Seaborn](https://img.shields.io/badge/Seaborn-Visualization-blueviolet)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
@@ -20,7 +21,9 @@ The repository showcases systematic workflows for:
 5. **Feature Engineering**: Creating customer lifecycle cohorts (`TenureCohort`) and billing velocity ratios (`ChargeRatio`).
 6. **Exploratory Data Analysis (EDA)**: Descriptive statistics, univariate distributions, bivariate churn driver analysis, correlation matrices, and multivariate interactions.
 7. **ML Preprocessing**: Binary encoding, One-Hot Encoding (drop-first), and `StandardScaler` feature normalization.
-8. **Automated Unit Testing**: Comprehensive test suite covering cleaning, imputation, outlier boundaries, and scaling.
+8. **Predictive ML Validation**: Benchmarking Logistic Regression, Random Forest, and Gradient Boosting (achieving **0.847 ROC-AUC**).
+9. **Interactive Web Dashboard**: Full Flask application featuring live data browsing and a real-time customer churn risk scoring calculator.
+10. **Automated Unit Testing**: 9 comprehensive unit tests verifying data integrity, preprocessing transformations, modeling, and API endpoints.
 
 ---
 
@@ -35,26 +38,34 @@ ml-data-preprocessing-eda/
 │       ├── telco_customer_churn_cleaned.csv    # Cleaned tabular dataset
 │       └── telco_customer_churn_encoded.csv    # Preprocessed & scaled ML-ready matrix
 ├── notebooks/
-│   └── eda_and_preprocessing.ipynb             # Interactive Jupyter Notebook with rich visuals
+│   └── eda_and_preprocessing.ipynb             # Interactive Jupyter Notebook with embedded outputs
 ├── reports/
 │   ├── EDA_and_Preprocessing_Report.md         # Comprehensive internship technical report
+│   ├── internship_report.html                  # Self-contained, printable interactive HTML report
 │   ├── numerical_summary.csv                   # Numeric descriptive statistics table
 │   ├── categorical_summary.csv                 # Categorical frequency & cardinality table
+│   ├── model_benchmark_summary.csv             # Classifier performance benchmarks
 │   └── figures/                                # High-resolution visualization plots
 │       ├── 01_numerical_distributions.png
 │       ├── 02_outlier_boxplots.png
 │       ├── 03_target_distribution.png
 │       ├── 04_churn_by_key_drivers.png
 │       ├── 05_correlation_heatmap.png
-│       └── 06_tenure_vs_charges_scatter.png
+│       ├── 06_tenure_vs_charges_scatter.png
+│       ├── 07_model_benchmark_roc.png
+│       └── 08_feature_importances.png
 ├── src/
 │   ├── __init__.py
 │   ├── data_loader.py                          # Data ingestion & schema inspection
 │   ├── preprocessing.py                        # Cleaning, imputation, outliers, encoding, scaling
-│   └── eda.py                                  # Summary statistics & visualization generator
+│   ├── eda.py                                  # Summary statistics & visualization generator
+│   ├── model_baseline.py                       # Supervised ML benchmark & ROC/PR curves
+│   └── report_generator.py                     # Self-contained HTML report compiler
 ├── tests/
 │   ├── __init__.py
-│   └── test_preprocessing.py                   # Automated unit tests
+│   ├── test_preprocessing.py                   # Automated tests for data pipeline & models
+│   └── test_app.py                             # Automated tests for Flask dashboard & API
+├── app.py                                      # Interactive Flask Web Dashboard & Live Predictor
 ├── main.py                                     # End-to-end pipeline execution runner
 ├── requirements.txt                            # Project package dependencies
 ├── .gitignore                                  # Git exclusion rules
@@ -107,6 +118,20 @@ We evaluated numerical features using Tukey's fences ($[Q_1 - 1.5 \times \text{I
 
 ---
 
+## 🤖 Machine Learning Validation & Benchmark Results
+
+To confirm that the preprocessed feature representations generalize well to predictive modeling, we trained three distinct supervised classifiers on an 80/20 stratified split:
+
+| Classifier | Accuracy (%) | Precision (%) | Recall (%) | F1-Score (%) | ROC-AUC | PR-AUC |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Random Forest** | **80.34%** | **67.38%** | 50.27% | 57.58% | **0.8466** | **0.6568** |
+| **Logistic Regression** | 79.84% | 65.20% | 51.60% | 57.61% | 0.8429 | 0.6355 |
+| **Gradient Boosting** | 79.70% | 64.57% | **52.14%** | **57.69%** | 0.8422 | 0.6489 |
+
+- **Top Predictive Features:** Contract Type (`Contract_Two year`, `Contract_One year`), `tenure_scaled`, `MonthlyCharges_scaled`, `PaymentMethod_Electronic check`, and `TechSupport_Yes`.
+
+---
+
 ## 🚀 Getting Started & Execution
 
 ### Prerequisites
@@ -124,22 +149,26 @@ pip install -r requirements.txt
 ```
 
 ### Running the End-to-End Pipeline
-Execute the complete ingestion, cleaning, feature engineering, and visualization pipeline:
+Execute data ingestion, cleaning, outlier testing, feature engineering, summary tables, plots, and ML benchmarking:
 ```bash
 python main.py
 ```
 
-### Running the Unit Test Suite
-Execute automated tests verifying missing value imputation, outlier detection, and scaling logic:
+### Launching the Interactive Web Dashboard
+Run the local Flask web application with interactive charts and a live customer churn calculator:
+```bash
+python app.py
+# Open your browser at http://127.0.0.1:5000
+```
+
+### Running the Automated Unit Test Suite
+Execute automated unit tests covering all cleaning steps, outlier boundaries, encoding, models, and dashboard routes:
 ```bash
 python -m unittest discover -s tests
 ```
 
-### Exploring the Interactive Jupyter Notebook
-Launch the notebook to inspect interactive visualizations and markdown documentation:
-```bash
-jupyter notebook notebooks/eda_and_preprocessing.ipynb
-```
+### Viewing the Standalone HTML Report
+Open `reports/internship_report.html` directly in any web browser (Chrome, Edge, Firefox, Safari) to view a formatted, printable report with embedded charts and KPI cards.
 
 ---
 

@@ -11,6 +11,8 @@ import pandas as pd
 from src.data_loader import DataLoader
 from src.preprocessing import DataPreprocessor
 from src.eda import ExploratoryAnalyzer
+from src.model_baseline import BaselineModelBenchmark
+from src.report_generator import generate_html_report
 
 
 def run_pipeline():
@@ -102,11 +104,29 @@ def run_pipeline():
     analyzer.plot_correlation_heatmap(clean_df)
     analyzer.plot_tenure_vs_charges_scatter(clean_df)
 
+    # 4. BASELINE ML BENCHMARK
+    print("\n--- PHASE 4: MACHINE LEARNING VALIDATION & BENCHMARKING ---")
+    benchmark = BaselineModelBenchmark(data_path=encoded_csv_path, output_dir=figures_dir)
+    X_train, X_test, y_train, y_test = benchmark.load_and_split_data(target_col="Churn", test_size=0.2)
+    model_summary = benchmark.train_and_evaluate(X_train, X_test, y_train, y_test)
+    print("\n[Model Benchmark Evaluation Summary]")
+    print(model_summary.to_string(index=False))
+    model_summary.to_csv(reports_dir / "model_benchmark_summary.csv", index=False)
+
+    benchmark.plot_roc_and_pr_curves(X_test, y_test)
+    benchmark.plot_feature_importances(X_train, top_n=15)
+
+    # 5. GENERATE INTERACTIVE HTML REPORT
+    print("\n--- PHASE 5: EXPORTING STANDALONE INTERACTIVE HTML REPORT ---")
+    generate_html_report(project_root)
+
     print("\n" + "=" * 70)
     print(" PIPELINE EXECUTION COMPLETED SUCCESSFULLY!")
-    print(f" Clean Data : {clean_csv_path}")
-    print(f" Figures    : {figures_dir}")
-    print(f" Reports    : {reports_dir}")
+    print(f" Clean Data  : {clean_csv_path}")
+    print(f" Encoded Data: {encoded_csv_path}")
+    print(f" Figures     : {figures_dir}")
+    print(f" Reports     : {reports_dir}")
+    print(f" HTML Report : {reports_dir / 'internship_report.html'}")
     print("=" * 70)
 
 

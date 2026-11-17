@@ -236,12 +236,27 @@ Churn Class Balance:
 ---
 
 ## 6. Machine Learning Readiness: Encoding & Scaling
-To prepare the dataset for predictive machine learning algorithms (Logistic Regression, Random Forest, XGBoost):
+To prepare the dataset for predictive machine learning algorithms (Logistic Regression, Random Forest, Gradient Boosting):
 1. **Target Encoding**: Mapped `Churn` to `{No: 0, Yes: 1}`.
 2. **Binary Categorical Mapping**: Converted binary features (`gender`, `Partner`, `Dependents`, `PhoneService`, `PaperlessBilling`) to `{0, 1}`.
 3. **One-Hot Encoding**: Expanded nominal multi-class features (`Contract`, `InternetService`, `PaymentMethod`, `TenureCohort`) via `pd.get_dummies(..., drop_first=True)` to prevent multicollinearity.
 4. **Feature Scaling**: Fitted `StandardScaler` to continuous variables (`tenure`, `MonthlyCharges`, `TotalCharges`), normalizing them to $\mu = 0, \sigma = 1$.
 5. **Final Output**: Encoded dataset exported to `data/processed/telco_customer_churn_encoded.csv` (7,043 rows $\times$ 31 columns).
+
+### 6.1 Supervised Machine Learning Benchmark Results
+We validated model readiness on an 80/20 stratified split across three baseline models:
+
+| Classifier | Accuracy (%) | Precision (%) | Recall (%) | F1-Score (%) | ROC-AUC | PR-AUC |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Random Forest** | **80.34%** | **67.38%** | 50.27% | 57.58% | **0.8466** | **0.6568** |
+| **Logistic Regression** | 79.84% | 65.20% | 51.60% | 57.61% | 0.8429 | 0.6355 |
+| **Gradient Boosting** | 79.70% | 64.57% | **52.14%** | **57.69%** | 0.8422 | 0.6489 |
+
+*Refer to visualizations:* `reports/figures/07_model_benchmark_roc.png` & `08_feature_importances.png`
+
+- **Key Takeaways**:
+  - All three models achieve an ROC-AUC of $\sim 0.84-0.85$, demonstrating strong predictive capability.
+  - The top predictive features align with our EDA findings: **Contract commitment**, **Tenure duration**, **Monthly Charges**, **Internet Service Type**, and **Tech Support availability**.
 
 ---
 

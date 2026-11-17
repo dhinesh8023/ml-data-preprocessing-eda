@@ -13,6 +13,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from src.data_loader import DataLoader
 from src.preprocessing import DataPreprocessor
+from src.model_baseline import BaselineModelBenchmark
 
 
 class TestDataPreprocessing(unittest.TestCase):
@@ -95,6 +96,27 @@ class TestDataPreprocessing(unittest.TestCase):
         self.assertIn("tenure_scaled", encoded_df.columns)
         self.assertIn("MonthlyCharges_scaled", encoded_df.columns)
         self.assertIn("TotalCharges_scaled", encoded_df.columns)
+
+    def test_baseline_benchmark(self):
+        """Test baseline benchmark model training and evaluation."""
+        bigger_df = pd.concat([self.sample_df] * 5, ignore_index=True)
+        clean_df, _ = self.preprocessor.fix_data_types_and_missing(bigger_df)
+        clean_df = self.preprocessor.clean_categories_and_engineer_features(clean_df)
+        encoded_df = self.preprocessor.encode_and_scale(clean_df, numeric_cols=["tenure", "MonthlyCharges", "TotalCharges"])
+        
+        # Save temp test csv
+        tmp_csv = Path(__file__).resolve().parent / "tmp_test_encoded.csv"
+        encoded_df.to_csv(tmp_csv, index=False)
+        try:
+            benchmark = BaselineModelBenchmark(data_path=tmp_csv, output_dir=tmp_csv.parent)
+            X_train, X_test, y_train, y_test = benchmark.load_and_split_data(target_col="Churn", test_size=0.4)
+            summary = benchmark.train_and_evaluate(X_train, X_test, y_train, y_test)
+            self.assertIn("Model", summary.columns)
+            self.assertIn("ROC-AUC", summary.columns)
+            self.assertEqual(len(summary), 3)
+        finally:
+            if tmp_csv.exists():
+                tmp_csv.unlink()
 
 
 if __name__ == "__main__":
