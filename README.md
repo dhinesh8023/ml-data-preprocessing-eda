@@ -7,6 +7,7 @@
 ![Flask](https://img.shields.io/badge/Flask-Web%20Dashboard-black?logo=flask&logoColor=white)
 ![Seaborn](https://img.shields.io/badge/Seaborn-Visualization-blueviolet)
 ![License](https://img.shields.io/badge/License-MIT-green)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dhinesh8023/ml-data-preprocessing-eda/blob/main/notebooks/eda_and_preprocessing.ipynb)
 
 ---
 
@@ -134,7 +135,16 @@ To confirm that the preprocessed feature representations generalize well to pred
 
 ## 🚀 Getting Started & Execution
 
-### Prerequisites
+### ☁️ Run in Google Colab (One-Click Cloud Execution)
+Run the entire Jupyter Notebook in the cloud with zero local setup or installation:
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dhinesh8023/ml-data-preprocessing-eda/blob/main/notebooks/eda_and_preprocessing.ipynb)
+
+👉 **Direct Link:** [https://colab.research.google.com/github/dhinesh8023/ml-data-preprocessing-eda/blob/main/notebooks/eda_and_preprocessing.ipynb](https://colab.research.google.com/github/dhinesh8023/ml-data-preprocessing-eda/blob/main/notebooks/eda_and_preprocessing.ipynb)
+
+---
+
+### Local Prerequisites
 - Python 3.10 or higher
 - Git
 

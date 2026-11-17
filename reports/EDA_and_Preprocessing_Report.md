@@ -5,6 +5,7 @@
 **GitHub:** [@dhinesh8023](https://github.com/dhinesh8023)  
 **Project Domain:** Customer Retention Analytics & Machine Learning Pipeline Engineering  
 **Dataset:** IBM Telco Customer Churn ([Public Kaggle / UCI Machine Learning Repository](https://www.kaggle.com/datasets/blastchar/telco-customer-churn))  
+**Interactive Notebook:** [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dhinesh8023/ml-data-preprocessing-eda/blob/main/notebooks/eda_and_preprocessing.ipynb)  
 **Submission Date:** November 2026  
 
 ---
