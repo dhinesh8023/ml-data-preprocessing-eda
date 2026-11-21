@@ -1,7 +1,7 @@
 # 🩺 Machine Learning Classification Model
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dhinesh8023/ml-classification-model/blob/main/notebooks/classification_model.ipynb)
-[![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-181717?logo=github)](https://github.com/dhinesh8023/ml-classification-model)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dhinesh8023/ml-data-preprocessing-eda/blob/classification-model/notebooks/classification_model.ipynb)
+[![GitHub Repository](https://img.shields.io/badge/GitHub-Branch%3A%20classification--model-181717?logo=github)](https://github.com/dhinesh8023/ml-data-preprocessing-eda/tree/classification-model)
 [![Python Version](https://img.shields.io/badge/Python-3.9%20%7C%203.10%20%7C%203.11%20%7C%203.12%20%7C%203.14-blue.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Framework: Scikit--Learn](https://img.shields.io/badge/Framework-scikit--learn-orange.svg)](https://scikit-learn.org/)
@@ -156,7 +156,7 @@ Accuracy simply computes $\frac{TP + TN}{TP + TN + FP + FN}$. On an imbalanced o
 ### Option A: One-Click Google Colab
 You can run the complete project online without installing anything locally:
 
-1. Click the badge: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dhinesh8023/ml-classification-model/blob/main/notebooks/classification_model.ipynb)
+1. Click the badge: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dhinesh8023/ml-data-preprocessing-eda/blob/classification-model/notebooks/classification_model.ipynb)
 2. In Google Colab, select **Runtime > Run all** (`Ctrl + F9`).
 3. The notebook will automatically execute all steps, display charts, and print the results explanation.
 
@@ -166,8 +166,8 @@ You can run the complete project online without installing anything locally:
 
 #### 1. Clone the Repository
 ```bash
-git clone https://github.com/dhinesh8023/ml-classification-model.git
-cd ml-classification-model
+git clone -b classification-model https://github.com/dhinesh8023/ml-data-preprocessing-eda.git
+cd ml-data-preprocessing-eda
 ```
 
 #### 2. Create and Activate a Virtual Environment

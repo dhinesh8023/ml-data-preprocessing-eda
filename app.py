@@ -62,10 +62,10 @@ HTML_TEMPLATE = """
                 <p class="lead text-light opacity-75 mb-0">Breast Cancer Wisconsin (Diagnostic) Dataset • Logistic Regression vs. Decision Tree</p>
             </div>
             <div class="col-md-4 text-md-end mt-3 mt-md-0">
-                <a href="https://github.com/dhinesh8023/ml-classification-model" target="_blank" class="btn btn-outline-light me-2">
+                <a href="https://github.com/dhinesh8023/ml-data-preprocessing-eda/tree/classification-model" target="_blank" class="btn btn-outline-light me-2">
                     <i class="fab fa-github"></i> GitHub Repo
                 </a>
-                <a href="https://colab.research.google.com/github/dhinesh8023/ml-classification-model/blob/main/notebooks/classification_model.ipynb" target="_blank" class="btn btn-warning">
+                <a href="https://colab.research.google.com/github/dhinesh8023/ml-data-preprocessing-eda/blob/classification-model/notebooks/classification_model.ipynb" target="_blank" class="btn btn-warning">
                     <i class="fa-solid fa-bolt"></i> Google Colab
                 </a>
             </div>
